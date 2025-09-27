@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "0l/6uLzdNjJMGrYxXHHs19mtwoy3dFZG+W0qDjdQTqU=",
+  "Source": "SurveyBackend",
+  "BasePath": "_content/SurveyBackend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
