@@ -5,7 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
-import { Trash2, ChevronLeft, ChevronRight, Edit } from "lucide-react";
+import { Trash2, ChevronLeft, ChevronRight, Edit, Plus, LayoutGrid, List } from "lucide-react";
 
 interface Survey {
   id: number;
@@ -128,8 +128,11 @@ export default function DashboardPage() {
 
           {user?.role === "Admin" && (
             <Link href="/Dashboard/create-survey">
-              <button className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold shadow-lg shadow-blue-500/30 transition-all hover:-translate-y-0.5 active:translate-y-0">
-                <span className="text-lg">+</span> สร้างแบบสอบถาม
+              <button className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-3 rounded-xl font-bold shadow-lg shadow-emerald-500/30 transition-all hover:-translate-y-0.5 active:translate-y-0 group">
+                <div className="bg-white/20 p-1 rounded-lg group-hover:bg-white/30 transition-colors">
+                  <Plus size={20} />
+                </div>
+                <span>สร้างแบบสอบถาม</span>
               </button>
             </Link>
           )}
@@ -138,11 +141,14 @@ export default function DashboardPage() {
         {/* Content Area */}
         <div className="glass-card rounded-2xl p-8 min-h-[500px] flex flex-col">
           <div className="flex justify-between items-center mb-8 border-b border-slate-100 pb-4">
-            <h3 className="text-xl font-bold text-slate-700 flex items-center gap-2">
-              <span className="bg-blue-100 text-blue-600 p-1.5 rounded-lg text-sm">
-                {surveys.length}
+            <h3 className="text-xl font-bold text-slate-700 flex items-center gap-3">
+              <div className="bg-emerald-100 p-2 rounded-lg">
+                <LayoutGrid className="text-emerald-600 w-5 h-5" />
+              </div>
+              <span>แบบสอบถามทั้งหมด</span>
+              <span className="bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-sm font-medium border border-slate-200">
+                {surveys.length} รายการ
               </span>
-              แบบสอบถามทั้งหมด
             </h3>
           </div>
 
@@ -163,8 +169,8 @@ export default function DashboardPage() {
             <>
               <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
                 {currentSurveys.map(s => (
-                  <div key={s.id} className="group bg-white border border-slate-200 rounded-xl p-6 hover:border-blue-300 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300 relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-1 h-full bg-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                  <div key={s.id} className="group bg-white border border-slate-200 rounded-2xl p-6 hover:border-emerald-300 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300 relative overflow-hidden flex flex-col justify-between h-full">
+                    <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
 
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-lg font-bold text-slate-800 line-clamp-2 leading-tight group-hover:text-blue-700 transition-colors">
