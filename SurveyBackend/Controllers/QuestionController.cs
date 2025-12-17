@@ -16,8 +16,8 @@ public class QuestionController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateQuestion([FromBody] Question question)
     {
-        var questionId = await _questionRepo.CreateQuestion(question);
-        return Ok(new { QuestionId = questionId });
+       var questionId = await _questionRepo.CreateQuestion(question);
+        return Ok(new { questionId });
     }
 
     [HttpGet("{surveyId}")]

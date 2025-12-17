@@ -32,8 +32,8 @@ namespace SurveyBackend.Repositories
             using var conn = new MySqlConnection(_connectionString);
 
             var sql = @"
-                insert into Users (Username, Password, Role)
-                values (@Username, @Password, @Role);
+                insert into Users (Username, FullName, Email, Phone, Password, Role)
+                values (@Username, @FullName, @Email, @Phone, @Password, @Role);
                 select LAST_INSERT_ID();";
 
             return await conn.ExecuteScalarAsync<int>(sql, user);

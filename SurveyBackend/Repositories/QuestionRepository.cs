@@ -1,6 +1,7 @@
 using Dapper;
 using MySql.Data.MySqlClient;
 using SurveyBackend.Models;
+using System.Text.Json;
 
 public interface IQuestionRepository
 {
@@ -20,14 +21,19 @@ public class QuestionRepository : IQuestionRepository
     public async Task<int> CreateQuestion(Question question)
     {
         using var conn = new MySqlConnection(_connectionString);
-        var sql = "insert into question (SurveyId, Text) values (@SurveyId, @Text); select LAST_INSERT_ID();";
+        var sql = "insert into question (SurveyId, Text , Type , Options) values (@SurveyId, @Text, @Type, @Options); select LAST_INSERT_ID();";
         return await conn.ExecuteScalarAsync<int>(sql, question);
     }
 
     public async Task<IEnumerable<Question>> GetQuestions(int surveyId)
     {
         using var conn = new MySqlConnection(_connectionString);
-        var sql = "select * from question where SurveyId = @SurveyId";
-        return await conn.QueryAsync<Question>(sql, new { SurveyId = surveyId });
+        var sql = "SELECT * FROM question WHERE SurveyId = @SurveyId";
+        var list = await conn.QueryAsync<Question>(sql, new { SurveyId = surveyId });
+
+        // OptionsList จะ parse JSON อัตโนมัติจาก get accessor
+        return list;
     }
+
+
 }

@@ -33,8 +33,12 @@ namespace SurveyBackend.Controllers
         public async Task<IActionResult> Login([FromBody] User user)
         {
             var existing = await _userRepo.GetByUsername(user.Username);
-            if (existing == null || existing.Password != user.Password)
-                return Unauthorized("Invalid credentials");
+            
+            if (existing == null)
+                return Unauthorized(new { message = "ไม่พบ Username นี้ในระบบ" });
+
+            if (existing.Password != user.Password)
+                return Unauthorized(new { message = "Password ไม่ถูกต้อง" });
 
             return Ok(new { message = "Login successful", userId  = existing.Id,role = existing.Role });
         }
