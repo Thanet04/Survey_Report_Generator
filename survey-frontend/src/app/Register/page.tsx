@@ -24,9 +24,7 @@ export default function Register() {
         icon: 'warning',
         title: 'ข้อมูลไม่ครบ',
         text: 'กรุณากรอกข้อมูลให้ครบถ้วน',
-        customClass: {
-          popup: 'rounded-xl border border-gray-100 shadow-xl'
-        }
+        customClass: { popup: 'rounded-xl border border-gray-100 shadow-xl' }
       });
       return;
     }
@@ -36,9 +34,7 @@ export default function Register() {
         icon: 'warning',
         title: 'รหัสผ่านไม่ตรงกัน',
         text: 'กรุณากรอกรหัสผ่านและยืนยันรหัสผ่านให้ตรงกัน',
-        customClass: {
-          popup: 'rounded-xl border border-gray-100 shadow-xl'
-        }
+        customClass: { popup: 'rounded-xl border border-gray-100 shadow-xl' }
       });
       return;
     }
@@ -54,9 +50,7 @@ export default function Register() {
         text: `รหัสผู้ใช้: ${res.data.UserId}`,
         timer: 2000,
         showConfirmButton: false,
-        customClass: {
-          popup: 'rounded-xl border border-gray-100 shadow-xl'
-        }
+        customClass: { popup: 'rounded-xl border border-gray-100 shadow-xl' }
       });
 
       setTimeout(() => {
@@ -67,137 +61,141 @@ export default function Register() {
         icon: 'error',
         title: 'ลงทะเบียนล้มเหลว',
         text: err.response?.data?.message || 'เกิดข้อผิดพลาด',
-        customClass: {
-          popup: 'rounded-xl border border-gray-100 shadow-xl'
-        }
+        customClass: { popup: 'rounded-xl border border-gray-100 shadow-xl' }
       });
       setIsLoading(false);
     }
   };
 
   return (
-    <div className="w-full max-w-md animate-fade-in-up px-4">
-      <div className="glass rounded-2xl p-8 md:p-10 relative overflow-hidden">
-        {/* Decorative background ellipses */}
-        <div className="absolute -top-20 -left-20 w-40 h-40 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
-        <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-purple-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 p-4">
+      <div className="w-full max-w-md animate-fade-in-up">
+        <div className="glass rounded-2xl p-8 md:p-10 relative overflow-hidden bg-white/80 border border-slate-200 shadow-xl">
+          {/* Decorative background ellipses */}
+          <div className="absolute -top-20 -left-20 w-40 h-40 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
+          <div className="absolute -bottom-20 -right-20 w-40 h-40 bg-sky-300 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
 
-        <div className="text-center mb-8 relative z-10">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 mb-4 shadow-inner">
-            <UserPlus className="w-8 h-8 text-blue-600" />
+          <div className="text-center mb-8 relative z-10">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-50 mb-4 shadow-sm border border-blue-100">
+              <UserPlus className="w-8 h-8 text-blue-600" />
+            </div>
+            <h1 className="text-3xl font-bold text-slate-800 mb-2 tracking-tight">สร้างบัญชีใหม่</h1>
+            <p className="text-slate-500 text-sm">กรอกข้อมูลเพื่อเริ่มต้นใช้งานระบบ Survey</p>
           </div>
-          <h1 className="text-3xl font-bold text-gray-800 mb-2 tracking-tight">สร้างบัญชีใหม่</h1>
-          <p className="text-gray-500 text-sm">กรอกข้อมูลเพื่อเริ่มต้นใช้งานระบบ Survey</p>
-        </div>
 
-        <form onSubmit={handleRegister} className="space-y-5 relative z-10">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <form onSubmit={handleRegister} className="space-y-5 relative z-10">
+            {/* Username and Fullname */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="relative group">
+                <User className="absolute left-3 top-3.5 h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                <input
+                  id="username"
+                  type="text"
+                  required
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+                  placeholder="ชื่อผู้ใช้"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                />
+              </div>
+
+              <div className="relative group">
+                <User className="absolute left-3 top-3.5 h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                <input
+                  id="fullname"
+                  type="text"
+                  required
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+                  placeholder="ชื่อ-นามสกุล"
+                  value={fullname}
+                  onChange={e => setFullname(e.target.value)}
+                />
+              </div>
+            </div>
+
+            {/* Email */}
             <div className="relative group">
-              <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+              <Mail className="absolute left-3 top-3.5 h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
               <input
-                id="username"
-                type="text"
+                id="email"
+                type="email"
                 required
-                className="w-full pl-10 pr-4 py-3 glass-input rounded-xl text-gray-700 placeholder-gray-400 outline-none"
-                placeholder="ชื่อผู้ใช้"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+                placeholder="อีเมลของคุณ"
+                value={email}
+                onChange={e => setEmail(e.target.value)}
               />
             </div>
 
+            {/* Phone */}
             <div className="relative group">
-              <User className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
+              <Phone className="absolute left-3 top-3.5 h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
               <input
-                id="fullname"
-                type="text"
+                id="phone"
+                type="tel"
                 required
-                className="w-full pl-10 pr-4 py-3 glass-input rounded-xl text-gray-700 placeholder-gray-400 outline-none"
-                placeholder="ชื่อ-นามสกุล"
-                value={fullname}
-                onChange={e => setFullname(e.target.value)}
-              />
-            </div>
-          </div>
-
-          <div className="relative group">
-            <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
-            <input
-              id="email"
-              type="email"
-              required
-              className="w-full pl-10 pr-4 py-3 glass-input rounded-xl text-gray-700 placeholder-gray-400 outline-none"
-              placeholder="อีเมลของคุณ"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
-          </div>
-
-          <div className="relative group">
-            <Phone className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
-            <input
-              id="phone"
-              type="tel"
-              required
-              maxLength={10}
-              inputMode="numeric"
-              className="w-full pl-10 pr-4 py-3 glass-input rounded-xl text-gray-700 placeholder-gray-400 outline-none"
-              placeholder="เบอร์โทรศัพท์ (10 หลัก)"
-              value={phone}
-              onChange={e => {
-                const value = e.target.value.replace(/\D/g, '').slice(0, 10);
-                setPhone(value);
-              }}
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="relative group">
-              <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
-              <input
-                id="password"
-                type="password"
-                required
-                className="w-full pl-10 pr-4 py-3 glass-input rounded-xl text-gray-700 placeholder-gray-400 outline-none"
-                placeholder="รหัสผ่าน"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
+                maxLength={10}
+                inputMode="numeric"
+                className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+                placeholder="เบอร์โทรศัพท์"
+                value={phone}
+                onChange={e => {
+                  const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                  setPhone(value);
+                }}
               />
             </div>
 
-            <div className="relative group">
-              <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 group-focus-within:text-blue-500 transition-colors" />
-              <input
-                id="confirmPassword"
-                type="password"
-                required
-                className="w-full pl-10 pr-4 py-3 glass-input rounded-xl text-gray-700 placeholder-gray-400 outline-none"
-                placeholder="ยืนยันรหัสผ่าน"
-                value={confirmPassword}
-                onChange={e => setConfirmPassword(e.target.value)}
-              />
+            {/* Password and Confirm Password */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="relative group">
+                <Lock className="absolute left-3 top-3.5 h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                <input
+                  id="password"
+                  type="password"
+                  required
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+                  placeholder="รหัสผ่าน"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
+              </div>
+
+              <div className="relative group">
+                <Lock className="absolute left-3 top-3.5 h-5 w-5 text-slate-400 group-focus-within:text-blue-500 transition-colors" />
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  required
+                  className="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-slate-700 placeholder-slate-400 focus:bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+                  placeholder="ยืนยันรหัสผ่าน"
+                  value={confirmPassword}
+                  onChange={e => setConfirmPassword(e.target.value)}
+                />
+              </div>
             </div>
-          </div>
 
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3.5 px-4 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 focus:ring-4 focus:ring-blue-200 transition-all duration-300 shadow-lg shadow-blue-500/30 flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-          >
-            {isLoading ? <Loader2 className="animate-spin w-5 h-5" /> : 'ลงทะเบียน'}
-            {!isLoading && <ArrowRight className="w-5 h-5" />}
-          </button>
-        </form>
-
-        <div className="mt-8 text-center relative z-10">
-          <p className="text-gray-500 text-sm">
-            มีบัญชีผู้ใช้งานอยู่แล้ว?{" "}
             <button
-              onClick={() => router.push("/login")}
-              className="text-blue-600 hover:text-blue-700 font-bold cursor-pointer hover:underline transition-all"
+              type="submit"
+              disabled={isLoading}
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3.5 px-4 rounded-xl font-bold shadow-lg shadow-blue-500/30 transition-all transform hover:-translate-y-0.5 active:translate-y-0 flex justify-center items-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              เข้าสู่ระบบ
+              {isLoading ? <Loader2 className="animate-spin w-5 h-5" /> : 'ลงทะเบียน'}
+              {!isLoading && <ArrowRight className="w-5 h-5" />}
             </button>
-          </p>
+          </form>
+
+          <div className="mt-8 text-center relative z-10">
+            <p className="text-slate-500 text-sm">
+              มีบัญชีผู้ใช้งานอยู่แล้ว?{" "}
+              <button
+                onClick={() => router.push("/login")}
+                className="text-blue-600 hover:text-blue-700 font-bold cursor-pointer hover:underline transition-all"
+              >
+                เข้าสู่ระบบ
+              </button>
+            </p>
+          </div>
         </div>
       </div>
     </div>

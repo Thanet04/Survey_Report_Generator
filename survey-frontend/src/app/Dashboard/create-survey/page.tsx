@@ -104,17 +104,11 @@ export default function CreateSurvey() {
 
       // สร้างคำถาม
       for (const q of validQuestions) {
-        // Prepare options string if choice
-        let optionsListStr = null;
-        if (q.type === 'choice') {
-          optionsListStr = q.options.filter(o => o.trim()).join(","); // Comma separated for backend
-        }
-
         await axios.post("http://localhost:5100/api/question", {
           SurveyId: surveyId,
           Text: q.text,
           Type: q.type,
-          Options: optionsListStr
+          Options: q.type === 'choice' ? JSON.stringify(q.options.filter(o => o.trim())) : "[]"
         });
       }
 

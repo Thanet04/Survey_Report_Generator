@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SurveyBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e0e7a18389b24ec38928ebbbaa9c1f0d2d35267")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+efe95c7425ad3d04476770a37bee42ba3f161d7f")]
 [assembly: System.Reflection.AssemblyProductAttribute("SurveyBackend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SurveyBackend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

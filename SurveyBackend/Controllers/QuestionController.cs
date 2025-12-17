@@ -20,6 +20,23 @@ public class QuestionController : ControllerBase
         return Ok(new { questionId });
     }
 
+
+    [HttpPut("{questionId}")]
+    public async Task<IActionResult> UpdateQuestion(int questionId, [FromBody] Question question)
+    {
+        var existing = await _questionRepo.GetQuestionById(questionId);
+        if (existing == null)
+            return NotFound(new { message = "ไม่พบคำถามนี้" });
+
+        existing.Text = question.Text;
+        existing.Type = question.Type;
+        existing.Options = question.Options;
+
+        await _questionRepo.UpdateQuestion(existing);
+
+        return Ok(new { message = "อัปเดตคำถามเรียบร้อย" });
+    }
+    
     [HttpGet("{surveyId}")]
     public async Task<IActionResult> GetQuestions(int surveyId)
     {

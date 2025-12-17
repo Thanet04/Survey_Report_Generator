@@ -7,6 +7,8 @@ public interface ISurveyRepository
     Task<int> CreateSurvey(Survey survey);
     Task<IEnumerable<Survey>> GetAllSurveys();
     Task<Survey?> GetSurveyById(int surveyId);
+    Task UpdateSurvey(Survey survey);
+    Task DeleteSurvey(int surveyId);
 }
 
 public class SurveyRepository : ISurveyRepository
@@ -35,4 +37,19 @@ public class SurveyRepository : ISurveyRepository
         using var conn = new MySqlConnection(_connectionString);
         return await conn.QueryFirstOrDefaultAsync<Survey>("select * from survey where Id = @SurveyId", new { SurveyId = surveyId });
     }
+
+    public async Task UpdateSurvey(Survey survey)
+    {
+        using var conn = new MySqlConnection(_connectionString);
+        var sql = "update survey set Title = @Title where Id = @Id";
+        await conn.ExecuteAsync(sql, survey);
+    }
+
+    public async Task DeleteSurvey(int surveyId)
+    {
+        using var conn = new MySqlConnection(_connectionString);
+        var sql = "delete from survey where Id = @SurveyId";
+        await conn.ExecuteAsync(sql, new { SurveyId = surveyId });
+    }
+
 }

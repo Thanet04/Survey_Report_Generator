@@ -5,7 +5,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
-import { Trash2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Trash2, ChevronLeft, ChevronRight, Edit } from "lucide-react";
 
 interface Survey {
   id: number;
@@ -64,9 +64,9 @@ export default function DashboardPage() {
       text: `คุณต้องการลบ "${title}" ใช่หรือไม่? ไม่สามารถกู้คืนได้`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#ef4444',
-      cancelButtonColor: '#64748b',
-      confirmButtonText: 'ใช่, ลบเลย',
+      confirmButtonColor: '#3b82f6',
+      cancelButtonColor: '#ef4444',
+      confirmButtonText: 'ใช่',
       cancelButtonText: 'ยกเลิก',
       customClass: {
         popup: 'rounded-2xl',
@@ -172,13 +172,23 @@ export default function DashboardPage() {
                       </h3>
                       {/* Admin Actions */}
                       {user?.role === "Admin" && (
-                        <button
-                          onClick={() => handleDelete(s.id, s.title)}
-                          className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
-                          title="ลบแบบสอบถาม"
-                        >
-                          <Trash2 size={18} />
-                        </button>
+                        <div className="flex gap-2">
+                          <Link href={`/Dashboard/edit-survey/${s.id}`}>
+                            <button
+                              className="p-2 text-slate-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors cursor-pointer"
+                              title="แก้ไขแบบสอบถาม"
+                            >
+                              <Edit size={18} />
+                            </button>
+                          </Link>
+                          <button
+                            onClick={() => handleDelete(s.id, s.title)}
+                            className="p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
+                            title="ลบแบบสอบถาม"
+                          >
+                            <Trash2 size={18} />
+                          </button>
+                        </div>
                       )}
                     </div>
 

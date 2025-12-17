@@ -7,6 +7,9 @@ public interface IQuestionRepository
 {
     Task<int> CreateQuestion(Question question);
     Task<IEnumerable<Question>> GetQuestions(int surveyId);
+    Task<Question?> GetQuestionById(int questionId);
+    Task UpdateQuestion(Question question);
+    Task DeleteQuestion(int questionId);
 }
 
 public class QuestionRepository : IQuestionRepository
@@ -35,5 +38,25 @@ public class QuestionRepository : IQuestionRepository
         return list;
     }
 
+    public async Task<Question?> GetQuestionById(int questionId)
+    {
+        using var conn = new MySqlConnection(_connectionString);
+        var sql = "select * from question where Id = @QuestionId";
+        return await conn.QueryFirstOrDefaultAsync<Question>(sql, new { QuestionId = questionId });
+    }
+
+    public async Task UpdateQuestion(Question question)
+    {
+        using var conn = new MySqlConnection(_connectionString);
+        var sql = "update question SET Text = @Text, Type = @Type, Options = @Options where Id = @Id";
+        await conn.ExecuteAsync(sql, question);
+    }
+
+    public async Task DeleteQuestion(int questionId)
+    {
+        using var conn = new MySqlConnection(_connectionString);
+        var sql = "delete from question where Id = @QuestionId";
+        await conn.ExecuteAsync(sql, new { QuestionId = questionId });
+    }
 
 }
